@@ -29,19 +29,34 @@
         return false
     }
 
-    $:changeFilter()
-
-    function changeFilter(){
-        if (filter_type == "All"){
+    $: console.log(img_src)
+	
+	const onChange = () => {
+		if (filter_type == "All"){
             img_src = "all_dinos.html";
         } else if(filter_type == "Diet"){
-            img_src = "hi";
+            if (diet == "Carnivorous"){
+                img_src = "carnivorous_dinos.html";
+            } else if(diet == "Herbivorous"){
+                img_src = "herbivorous_dinos.html";
+            } else if(diet == "Omnivorous"){
+                img_src = "omnivorous_dinos.html";
+            }
         } else if(filter_type == "Type"){
-            img_src = "";
+            if (type == "sauropod"){
+                img_src = "sauropods.html";
+            } else if(type == "theropod"){
+                img_src = "theropods.html";
+            } else if(type == "ceratopsian"){
+                img_src = "ceratopsians.html";
+            } else if(type == "euornithopod"){
+                img_src = "euornithopods.html";
+            } else if(type == "armoured dinosaur"){
+                img_src = "armoured_dinosaurs.html";
+            }
         }
-    }
+	}
 
-    $: console.log(img_src)
 
 
 </script>
@@ -59,28 +74,30 @@
             <iframe class="map" src={img_src} width=800 height=490 frameBorder=0></iframe>
 
             <label for="filters">Pick a filter:</label>
-            <select name="filters" id="filters" value={filter} onchange="changeFilter()">
-                <option id="All">All</option>
-                <option id="Diet">Diet</option>
-                <option id="Type">Type</option>
+            <select class="filters" id="filters" bind:value={filter_type} on:change={onChange}>
+                <option value={"All"}>All</option>
+                <option value={"Diet"}>Diet</option>
+                <option value={"Type"}>Type</option>
             </select>
             <br/>
 
-            <!-- {#if filter_type == "Diet"}
+            {#if filter_type == "Diet"}
                 <label for="filters">Pick a diet:</label>
-                <select name="filters" id="filters">
-                    <option value="Carnivorous">Carnivorous</option>
-                    <option value="Herbivorous">Herbivorous</option>
-                    <option value="Omnivorous">Omnivorous</option>
+                <select class="filters" id="filters" bind:value={diet} on:change={onChange}>
+                    <option value={"Carnivorous"}>Carnivorous</option>
+                    <option value={"Herbivorous"}>Herbivorous</option>
+                    <option value={"Omnivorous"}>Omnivorous</option>
                 </select>
             {:else if filter_type == "Type"}
                 <label for="filters">Pick a type:</label>
-                <select name="filters" id="filters">
-                    <option value="Carnivorous">Carnivorous</option>
-                    <option value="Herbivorous">Herbivorous</option>
-                    <option value="Omnivorous">Omnivorous</option>
+                <select class="filters" id="filters" bind:value={type} on:change={onChange}>
+                    <option value={"sauropod"}>Sauropods</option>
+                    <option value={"theropod"}>Theropods</option>
+                    <option value={"ceratopsian"}>Ceratopsians</option>
+                    <option value={"euornithopod"}>Euornithopods</option>
+                    <option value={"armoured dinosaur"}>Armoured Dinosaurs</option>
                 </select>
-            {/if} -->
+            {/if}
 
         </div>
     </div>
@@ -94,7 +111,7 @@
     
     .trends {
         width: 100%;
-        height: 100%;
+        height: 700px;
         /* background-attachment: fixed; */
         text-align: center;
     }
@@ -130,6 +147,10 @@
     .section .map {
         margin-left: 14%;
         display: block;
+    }
+
+    .filters{
+        margin-bottom: 2%;
     }
 
 </style>
