@@ -1,126 +1,27 @@
 <script>
-  // Write your JS here, or import other files
+  import Dinodex from "./Dinodex.svelte";
+  import DesignADino from "./Design-A-Dino.svelte";
+
+  let page = "dinodex"
+
+  function toggle(){
+    if (page == "design-a-dino"){
+      page = "dinodex"
+    } else{
+      page = "design-a-dino"
+    }
+  }
 </script>
 
 <main>
-  <!-- home -->
-  <div>
-    <img class = "background" src = "dino-home.png"/>
-    <button>LET'S GO!</button>
-  </div>
-  <!-- Dino Diet -->
-  <div class = "page">
-    <img class = "background" src="dino-question.png"/>
-    <div class = "question-box">
-      <h2>Dino Diet</h2>
-      <div class = "row">
-        <div class = "column">
-          <h3>Herbivore</h3>
-          <img class = "icon" src = "herbivore.png"/>
-        </div>
-        <div class = "column">
-          <h3>Carnivore</h3>
-          <img class = "icon" src = "carnivore.png"/>
-        </div>
-        <div class = "column">
-          <h3>Omnivore</h3>
-          <img class = "icon" src = "omnivore.png"/>
-        </div>
-      </div>
-      <button>NEXT</button>
-    </div>
-  </div>
 
-  <!-- Dino Region -->
-  <div class = "region">
-    <img class = "background" src="dino-question.png"/>
-    <div class = "question-box">
-      <h2>Dino Region</h2>
-      <div class = "row">
-        <div class = "column">
-          <h3>Asia</h3>
-        </div>
-        <div class = "column">
-          <h3>Africa</h3>
-        </div>
-        <div class = "column">
-          <h3>North America</h3>
-        </div>
-        <div class = "column">
-          <h3>South America</h3>
-        </div>
-        <div class = "column">
-          <h3>Antartica</h3>
-        </div>
-        <div class = "column">
-          <h3>Europe</h3>
-        </div>
-        <div class = "column">
-          <h3>Oceania</h3>
-        </div>
-      </div>
-      <button>NEXT</button>
-    </div>
-  </div>
+  
+  {#if page == "design-a-dino"}
+    <DesignADino/>  
+  {:else}
+    <Dinodex/>
+  {/if}
 
-  <!-- Dino Type -->
-  <div class = "page">
-    <img class = "background" src="dino-question.png"/>
-    <div class = "question-box">
-      <h2>Dino Diet</h2>
-      <div class = "row">
-        <div>
-          <img class = "icon" src = "left-arrow.png"/>
-        </div>
-        <div class = "column">
-          <img class = "icon" src = "sauropod.png"/>
-          <h3>Sauropod</h3>
-        </div>
-        <div>
-          <img class = "icon" src = "right-arrow.png"/>
-        </div>
-      </div>
-      <button>NEXT</button>
-    </div>
-  </div>
-
-  <!-- Dino Type -->
-  <div class = "page">
-    <img class = "background" src="dino-question.png"/>
-    <div class = "question-box">
-      <h2>Dino Type</h2>
-      <div class = "row">
-        <div class = "column">
-          <h3>Short</h3>
-          <img class = "icon" src = "short.png"/>
-        </div>
-        <div class = "column">
-          <h3>Medium</h3>
-          <img class = "icon" src = "medium.png"/>
-        </div>
-        <div class = "column">
-          <h3>Long</h3>
-          <img class = "icon" src = "long.png"/>
-        </div>
-      </div>
-      <button>NEXT</button>
-    </div>
-  </div>
-
-  <!-- Dino Name -->
-    <div class = "page">
-      <img class = "background" src="dino-question.png"/>
-      <div class = "question-box">
-        <h2>Dino Name</h2>
-        <div class = "row">
-          <div>
-            <img class = "icon" src = "name.png"/>
-            <input>
-          </div>
-        </div>
-        <button>GENERATE DINO!</button>
-      </div>
-    </div>
 </main>
 
 <style>
