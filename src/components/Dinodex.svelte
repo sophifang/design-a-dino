@@ -7,7 +7,7 @@
     let new_alpha = "A";
 
     onMount(async () => {
-        const res = await fetch('dinos.csv'); 
+        const res = await fetch('dinodata.csv'); 
         const csv = await res.text();
         dinos = d3.csvParse(csv, d3.autoType)
 

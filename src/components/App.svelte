@@ -45,68 +45,6 @@
   main {
     font-family: 'Quicksand';
   }
-  .background {
-    width: 100%;
-    height: auto;
-    background-attachment: fixed;
-    /* z-index: -1;
-    position: absolute; */
-  }
-  .page {
-    /* display: flex;
-    justify-content: center; */
-    
-  }
-  .question-box {
-    margin: auto;
-    background-color: white;
-    width: 80%;
-    height: 50%;
-    border-radius: 50px;
-    text-align: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 30px;
-    padding-right: 30px;
-  }
-  .region .row {
-    flex-wrap: wrap;
-  }
-  .region .column {
-    flex: 20%;
-    padding-top:.5%;
-    padding-bottom: .5%;
-    padding-left:1%;
-    padding-right:1%;
-  }
-  .row {
-    display: flex;
-    width:100%;
-    justify-content: center;
-    align-items: center;
-  }
-  .column {
-    flex: 33.33%;
-    padding: 20px;
-  }
-  .column:hover {
-    background-color: #F5F5F5;
-    border-radius: 15%;
-    outline: 2px solid #D9D9D9;
-    outline-offset: 0px;
-  }
-  .icon {
-    width: 80%;
-  }
-  h2 {
-    font-size: 30px;
-    font-family: 'Delius Unicase';
-  }
-  h3 {
-    font-size: 20px;
-    font-family: "Quicksand";
-    font-weight: 700;
-  }
   button {
     font-family: 'Delius Unicase';
     font-weight: bold;
