@@ -2,9 +2,7 @@
   import Dinodex from "./Dinodex.svelte";
   import DesignADino from "./Design-A-Dino.svelte";
   import DinoTrends from "./DinoTrends.svelte";
-
   let page = "design-a-dino"
-
   function change_page(new_page){
     if (new_page == "dinodex"){
       page = "dinodex"

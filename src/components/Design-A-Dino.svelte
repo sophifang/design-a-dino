@@ -1,7 +1,6 @@
 <script>
     import { onMount } from "svelte";
     import * as d3 from 'd3';
-
     let data = [];
 
     onMount(async () => {
@@ -74,8 +73,13 @@
         if (filteredDinosLength.length > 0) {
             chosenDino = filteredDinosLength[Math.floor(Math.random() * filteredDinosLength.length)];
             console.log(chosenDino);
+        } else if (filteredDinosType.length > 0) {
+            chosenDino = filteredDinosType[Math.floor(Math.random() * filteredDinosType.length)];
+
+        } else if (filteredDinosRegion > 0) {
+            chosenDino = filteredDinosRegion[Math.floor(Math.random() * filteredDinosRegion.length)];
         } else {
-            chosenDino = "Unfortuantely, no dino with these requirements exist in our dinodex."
+            chosenDino = filteredDinosDiet[Math.floor(Math.random() * filteredDinosDiet.length)];
         }
     }
     function selectDinoName() {
@@ -284,9 +288,14 @@
         <img class = "frame" src="frame.png"/>
         <div class = "question-box">
             <h2>Dino Reveal</h2>
-            <img class = "dino" src={"https://www.nhm.ac.uk/resources/nature-online/life/dinosaurs/dinosaur-directory/images/reconstruction/small/".concat(chosenDino.name).concat(".jpg")}/>
-            <p>{name} is a(n) Aardonyx, which is a Sauropod. It lived during the Jurassic period in Africa and was a {diet}. It was approximately 8.0m long.</p>
-            <button>EXPLORE MORE DINOS!</button>
+            <div class = "row">
+                <div class = "column">
+                    <img class = "icon" src={"https://www.nhm.ac.uk/resources/nature-online/life/dinosaurs/dinosaur-directory/images/reconstruction/small/".concat(chosenDino.name).concat(".jpg")}/>
+                </div>
+                <div class = "column">
+                    <p>{name} is a(n) {chosenDino.name}, which is a type of {chosenDino.type}. {name} lived during the {chosenDino.period_time} {chosenDino.period} period in {chosenDino.continent} and was {chosenDino.diet}. It was approximately {chosenDino.length} meters long.</p>
+                </div>
+            </div>
         </div>
     </div>
     {/if}
@@ -307,7 +316,7 @@
         width: 93%;
         height: auto;
         background-attachment: fixed;
-        margin-top: 120px;
+        margin-top: 170px;
         position: absolute;
         z-index: -1;
     }
@@ -326,6 +335,21 @@
     .dino-fact {
         display: flex;
         justify-content: center;
+    }
+    .dino-fact .question-box {
+        padding: 0;
+        height: 300px;
+        margin-top: 230px;
+    }
+    .dino-fact .row {
+        height: 150px;
+        margin-top: 150px;
+    }
+    .dino-fact .column:hover {
+        background-color: transparent;
+        border-radius: 0%;
+        outline: 0px;
+        outline-offset: 0px;
     }
     .region {
         display: flex;
