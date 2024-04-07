@@ -10,12 +10,11 @@
         const res = await fetch('dinodata.csv'); 
         const csv = await res.text();
         dinos = d3.csvParse(csv, d3.autoType);
-        console.log("dinos", dinos);
         getTypes();
     });
 	let types = [];
 	let selectedType = "";	
-	console.log("dinos", dinos);
+
 	const getTypes = () => {
 		for (let dinoObj of dinos) {
             console.log(dinoObj);
@@ -26,11 +25,8 @@
 		types = types.sort();
 	}	
 	
-	
-	// Query results
 	let filteredDinos = [];
-	
-	// For Select Menu
+
 	$: if (selectedType) getDinosByType();
 	$: console.log(filteredDinos, selectedType);
 	
@@ -44,7 +40,6 @@
 
 	}	
 	
-	// For Search Input
 	let searchTerm = "";
 	$: if (searchTerm) selectedType = ""; 
 	
@@ -56,35 +51,37 @@
 	}
     console.log(filteredDinos);
 </script>
-<section id="query-section">
-	<Menu {types} bind:selectedType />
-	<Search bind:searchTerm on:input={searchDinos} />
-</section>
-<main id="bookshelf">
-    {#if filteredDinos.length > 0}
+
+<main>
+    <div class="nav">
+        <Menu {types} bind:selectedType />
+        <Search bind:searchTerm on:input={searchDinos} />
+    </div>
+    <div class = "grid">
+        {#if filteredDinos.length > 0}
         {#each filteredDinos as {name, type}}
             <Dino {name}{type}/>
         {/each}	
-    {:else}
-        {#each dinos as {name, type}}
-            <Dino {name}{type}/>
-        {/each}	
-    {/if}
+        {:else}
+            {#each dinos as {name, type}}
+                <Dino {name}{type}/>
+            {/each}	
+        {/if}
+    </div>
 </main>
 
 <style>
-    * {
+    main {
 		box-sizing: border-box;
 	}
-    #query-section {
+    .nav {
 		width: 100%;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		padding: 2% 0;
 	}
-	/* General Structure */
-	main#bookshelf {
+	.grid {
 		width: 100%;
 		margin: 10px;
 		display: flex;

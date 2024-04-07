@@ -3,31 +3,26 @@
 </script>
 
 
-<div id="search-input-cont">
-	<input type="text" 
-				 id="search-field" 
-				 placeholder="Enter Search Term" 
-				 autocomplete="off"
-				 bind:value={searchTerm}
-				 on:input />
+<div>
+	<input type="text" placeholder="Enter Search Term" bind:value={searchTerm} on:input />
 </div> 
 
 
 <style>
-	#search-input-cont {
+	div {
 		width: 40%;
 		display: flex;
 		align-items: center;
 		margin: 0 0 0 10px;
 	}
 
-	#search-field {
+	input {
+        font-family: 'Quicksand';
 		width: 100%;
-		font-size: 1.3rem;
+		font-size: 20px;
 		border: 1px solid gray;
 		border-radius: 5px;
-		padding: 8px;
-		margin: 0 10px 0;
+		padding: 5px;
 	}
 
 </style>
