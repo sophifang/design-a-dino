@@ -22,20 +22,16 @@
         }
         return false
     }
-
 </script>
 
 <main>
-    <!-- Dino Locations -->
-    <iframe src="all_dinos.html" width=800 height=490 frameBorder=0></iframe>
-
     <!-- Dino Info -->
     {#each dinos as d, i}
-        <br/>
-        {#if check_alpha(d["name"][0])}
-            <h2> {d["name"][0].toUpperCase()} </h2>
-        {/if}
-        <button>{d["name"]}</button>
+    <br/>
+    {#if check_alpha(d["name"][0])}
+        <h2> {d["name"][0].toUpperCase()} </h2>
+    {/if}
+    <button>{d["name"]}</button>
     {/each}
 </main>
 
