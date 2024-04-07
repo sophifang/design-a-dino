@@ -284,6 +284,7 @@
         <img class = "frame" src="frame.png"/>
         <div class = "question-box">
             <h2>Dino Reveal</h2>
+            <img class = "dino" src={"https://www.nhm.ac.uk/resources/nature-online/life/dinosaurs/dinosaur-directory/images/reconstruction/small/".concat(chosenDino.name).concat(".jpg")}/>
             <p>{name} is a(n) Aardonyx, which is a Sauropod. It lived during the Jurassic period in Africa and was a {diet}. It was approximately 8.0m long.</p>
             <button>EXPLORE MORE DINOS!</button>
         </div>

@@ -112,7 +112,6 @@
     .trends {
         width: 100%;
         height: 700px;
-        /* background-attachment: fixed; */
         text-align: center;
     }
 

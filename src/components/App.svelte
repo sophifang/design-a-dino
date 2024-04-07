@@ -24,9 +24,6 @@
         <button class="pageButton" on:click={() => change_page("dinodex")}> Dinodex </button>
         <button class="pageButton" on:click={() => change_page("dinoTrends")}> DinoTrends </button>
 
-        <!-- <div class="logo">
-          <img src="logo.png"/>
-        </div> -->
       </div>
     </div>
   </div>
@@ -76,7 +73,7 @@
     justify-content: flex-start;
     flex-direction: column;
     width: 100%;
-    height: 50px;
+    height: 55px;
     background-color: #003d73;
     z-index: 10;
   }
@@ -84,10 +81,10 @@
   .pages {
     width: 100%;
     height: 100%;
-    margin-left: 20px;
   }
 
   button.pageButton {
+    margin-top: 5px;
     scale: 0.8;
   }
   
