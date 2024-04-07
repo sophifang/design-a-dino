@@ -1,4 +1,15 @@
 <script>
+    import { onMount } from "svelte";
+    import * as d3 from 'd3';
+
+    let data = [];
+
+    onMount(async () => {
+        const res = await fetch('dinodata.csv'); 
+        const csv = await res.text();
+        data = d3.csvParse(csv, d3.autoType)
+        console.log(data);
+    });
     let page = 0;
     let diet;
     let region;
@@ -8,7 +19,6 @@
     let imgNum = 0;
     function next() {
         page++;
-        console.log(name);
     }
     function nextImg() {
         imgNum++;
@@ -20,17 +30,53 @@
             imgNum--;
         }
     }
+    let filteredDinosDiet = [];
     function selectDiet(selectedDiet) {
         diet = selectedDiet;
+        for (let dinoObj of data) {
+            if (dinoObj.diet === diet) {
+                filteredDinosDiet = [...filteredDinosDiet, dinoObj]
+            }
+        }
+        console.log(filteredDinosDiet)
     }
+    let filteredDinosRegion = [];
     function selectRegion(selectedRegion) {
         region = selectedRegion;
+        for (let dinoObj of filteredDinosDiet) {
+            if (dinoObj.continent === region) {
+                filteredDinosRegion = [...filteredDinosRegion, dinoObj]
+            }
+        }
+        console.log(filteredDinosRegion)
     }
+    let filteredDinosType = [];
     function selectType(selectedType) {
         type = selectedType;
+        for (let dinoObj of filteredDinosRegion) {
+            if (dinoObj.type === type) {
+                filteredDinosType = [...filteredDinosType, dinoObj]
+            }
+        }
+        console.log(filteredDinosType)
     }
+    let chosenDino;
+    let filteredDinosLength= [];
     function selectLength(selectedLength) {
         length = selectedLength;
+        for (let dinoObj of filteredDinosType) {
+            if (dinoObj.size === length) {
+                filteredDinosLength = [...filteredDinosLength, dinoObj]
+            }
+        }
+        console.log(filteredDinosLength)
+
+        if (filteredDinosLength.length > 0) {
+            chosenDino = filteredDinosLength[Math.floor(Math.random() * filteredDinosLength.length)];
+            console.log(chosenDino);
+        } else {
+            chosenDino = "Unfortuantely, no dino with these requirements exist in our dinodex."
+        }
     }
     function selectDinoName() {
         name = document.getElementById("dino-name").value;
@@ -53,15 +99,15 @@
             <div class = "question-box">
             <h2>Dino Diet</h2>
             <div class = "row">
-                <div class = "column" on:click={() => selectDiet("herbivore")} style={`border: solid 2px ${diet === "herbivore" ? "#D9D9D9" : "#fff"}; background-color: ${diet === "herbivore" ? "#f5f5f5" : "#fff"}`}>
+                <div class = "column" on:click={() => selectDiet("Herbivorous")} style={`border: solid 2px ${diet === "Herbivorous" ? "#D9D9D9" : "#fff"}; background-color: ${diet === "Herbivorous" ? "#f5f5f5" : "#fff"}`}>
                 <h3>Herbivore</h3>
                 <img class = "icon" src = "herbivore.png"/>
                 </div>
-                <div class = "column" on:click={() => selectDiet("carnivore")} style={`border: solid 2px ${diet === "carnivore" ? "#D9D9D9" : "#fff"}; background-color: ${diet === "carnivore" ? "#f5f5f5" : "#fff"}`}>
+                <div class = "column" on:click={() => selectDiet("Carnivorous")} style={`border: solid 2px ${diet === "Carnivorous" ? "#D9D9D9" : "#fff"}; background-color: ${diet === "Carnivorous" ? "#f5f5f5" : "#fff"}`}>
                 <h3>Carnivore</h3>
                 <img class = "icon" src = "carnivore.png"/>
                 </div>
-                <div class = "column" on:click={() => selectDiet("omnivore")} style={`border: solid 2px ${diet === "omnivore" ? "#D9D9D9" : "#fff"}; background-color: ${diet === "omnivore" ? "#f5f5f5" : "#fff"}`}>
+                <div class = "column" on:click={() => selectDiet("Omnivorous")} style={`border: solid 2px ${diet === "Omnivorous" ? "#D9D9D9" : "#fff"}; background-color: ${diet === "Omnivorous" ? "#f5f5f5" : "#fff"}`}>
                 <h3>Omnivore</h3>
                 <img class = "icon" src = "omnivore.png"/>
                 </div>
@@ -78,25 +124,25 @@
             <div class = "question-box">
             <h2>Dino Region</h2>
             <div class = "row">
-                <div class = "column" on:click={() => selectRegion("asia")} style={`border: solid 2px ${region === "asia" ? "#D9D9D9" : "#fff"}; background-color: ${region === "asia" ? "#f5f5f5" : "#fff"}`}>
+                <div class = "column" on:click={() => selectRegion("Asia")} style={`border: solid 2px ${region === "Asia" ? "#D9D9D9" : "#fff"}; background-color: ${region === "Asia" ? "#f5f5f5" : "#fff"}`}>
                 <h3>Asia</h3>
                 </div>
-                <div class = "column" on:click={() => selectRegion("africa")} style={`border: solid 2px ${region === "africa" ? "#D9D9D9" : "#fff"}; background-color: ${region === "africa" ? "#f5f5f5" : "#fff"}`}>
+                <div class = "column" on:click={() => selectRegion("Africa")} style={`border: solid 2px ${region === "Africa" ? "#D9D9D9" : "#fff"}; background-color: ${region === "Africa" ? "#f5f5f5" : "#fff"}`}>
                 <h3>Africa</h3>
                 </div>
-                <div class = "column" on:click={() => selectRegion("north america")} style={`border: solid 2px ${region === "north america" ? "#D9D9D9" : "#fff"}; background-color: ${region === "north america" ? "#f5f5f5" : "#fff"}`}>
+                <div class = "column" on:click={() => selectRegion("North America")} style={`border: solid 2px ${region === "North America" ? "#D9D9D9" : "#fff"}; background-color: ${region === "North America" ? "#f5f5f5" : "#fff"}`}>
                 <h3>North America</h3>
                 </div>
-                <div class = "column" on:click={() => selectRegion("south america")} style={`border: solid 2px ${region === "south america" ? "#D9D9D9" : "#fff"}; background-color: ${region === "south america" ? "#f5f5f5" : "#fff"}`}>
+                <div class = "column" on:click={() => selectRegion("South America")} style={`border: solid 2px ${region === "South America" ? "#D9D9D9" : "#fff"}; background-color: ${region === "South America" ? "#f5f5f5" : "#fff"}`}>
                 <h3>South America</h3>
                 </div>
-                <div class = "column" on:click={() => selectRegion("antartica")} style={`border: solid 2px ${region === "antartica" ? "#D9D9D9" : "#fff"}; background-color: ${region === "antartica" ? "#f5f5f5" : "#fff"}`}>
+                <div class = "column" on:click={() => selectRegion("Antartica")} style={`border: solid 2px ${region === "Antartica" ? "#D9D9D9" : "#fff"}; background-color: ${region === "Antartica" ? "#f5f5f5" : "#fff"}`}>
                 <h3>Antartica</h3>
                 </div>
-                <div class = "column" on:click={() => selectRegion("europe")} style={`border: solid 2px ${region === "europe" ? "#D9D9D9" : "#fff"}; background-color: ${region === "europe" ? "#f5f5f5" : "#fff"}`}>
+                <div class = "column" on:click={() => selectRegion("Europe")} style={`border: solid 2px ${region === "Europe" ? "#D9D9D9" : "#fff"}; background-color: ${region === "Europe" ? "#f5f5f5" : "#fff"}`}>
                 <h3>Europe</h3>
                 </div>
-                <div class = "column" on:click={() => selectRegion("oceania")} style={`border: solid 2px ${region === "oceania" ? "#D9D9D9" : "#fff"}; background-color: ${region === "oceania" ? "#f5f5f5" : "#fff"}`}>
+                <div class = "column" on:click={() => selectRegion("Oceania")} style={`border: solid 2px ${region === "Oceania" ? "#D9D9D9" : "#fff"}; background-color: ${region === "Oceania" ? "#f5f5f5" : "#fff"}`}>
                 <h3>Oceania</h3>
                 </div>
             </div>
@@ -116,37 +162,37 @@
                     <img on:click={prevImg}  class = "icon" src = "left-arrow.png"/>
                 </div>
                 {#if imgNum % 6 === 0}
-                    <div class = "column" on:click={() => selectType("sauropod")} style={`border: solid 2px ${type === "sauropod" ? "#D9D9D9" : "#fff"}; background-color: ${type === "sauropod" ? "#f5f5f5" : "#fff"}`}>
+                    <div class = "column" on:click={() => selectType("Sauropod")} style={`border: solid 2px ${type === "Sauropod" ? "#D9D9D9" : "#fff"}; background-color: ${type === "Sauropod" ? "#f5f5f5" : "#fff"}`}>
                         <img class = "icon" src = "sauropod.png"/>
                         <h3>Sauropod</h3>
                     </div>
                 {/if}
                 {#if imgNum % 6 === 1}
-                    <div class = "column" on:click={() => selectType("ceratopsian")} style={`border: solid 2px ${type === "ceratopsian" ? "#D9D9D9" : "#fff"}; background-color: ${type === "ceratopsian" ? "#f5f5f5" : "#fff"}`}>
+                    <div class = "column" on:click={() => selectType("Ceratopsian")} style={`border: solid 2px ${type === "Ceratopsian" ? "#D9D9D9" : "#fff"}; background-color: ${type === "Ceratopsian" ? "#f5f5f5" : "#fff"}`}>
                         <img class = "icon" src = "ceratopsian.png"/>
                         <h3>Ceratopsian</h3>
                     </div>
                 {/if}
                 {#if imgNum % 6 === 2}
-                    <div class = "column" on:click={() => selectType("euornithopod")} style={`border: solid 2px ${type === "euornithopod" ? "#D9D9D9" : "#fff"}; background-color: ${type === "euornithopod" ? "#f5f5f5" : "#fff"}`}>
+                    <div class = "column" on:click={() => selectType("Euornithopod")} style={`border: solid 2px ${type === "Euornithopod" ? "#D9D9D9" : "#fff"}; background-color: ${type === "Euornithopod" ? "#f5f5f5" : "#fff"}`}>
                         <img class = "icon" src = "euornithopod.png"/>
                         <h3>Euornithopod</h3>
                     </div>
                 {/if}
                 {#if imgNum % 6 === 3}
-                    <div class = "column" on:click={() => selectType("small-theropod")} style={`border: solid 2px ${type === "small-theropod" ? "#D9D9D9" : "#fff"}; background-color: ${type === "small-theropod" ? "#f5f5f5" : "#fff"}`}>
+                    <div class = "column" on:click={() => selectType("Small Theropod")} style={`border: solid 2px ${type === "Small Theropod" ? "#D9D9D9" : "#fff"}; background-color: ${type === "Small Theropod" ? "#f5f5f5" : "#fff"}`}>
                         <img class = "icon" src = "small-theropod.png"/>
                         <h3>Small Theropod</h3>
                     </div>
                 {/if}
                 {#if imgNum % 6 === 4}
-                    <div class = "column" on:click={() => selectType("large-theropod")} style={`border: solid 2px ${type === "large-theropod" ? "#D9D9D9" : "#fff"}; background-color: ${type === "large-theropod" ? "#f5f5f5" : "#fff"}`}>
+                    <div class = "column" on:click={() => selectType("Large Theropod")} style={`border: solid 2px ${type === "Large Theropod" ? "#D9D9D9" : "#fff"}; background-color: ${type === "Large Theropod" ? "#f5f5f5" : "#fff"}`}>
                         <img class = "icon" src = "large-theropod.png"/>
                         <h3>Large Theropod</h3>
                     </div>
                 {/if}
                 {#if imgNum % 6 === 5}
-                    <div class = "column" on:click={() => selectType("armoured-dinosaur")} style={`border: solid 2px ${type === "armoured-dinosaur" ? "#D9D9D9" : "#fff"}; background-color: ${type === "armoured-dinosaur" ? "#f5f5f5" : "#fff"}`}>
+                    <div class = "column" on:click={() => selectType("Armoured Dinosaur")} style={`border: solid 2px ${type === "Armoured Dinosaur" ? "#D9D9D9" : "#fff"}; background-color: ${type === "Armoured Dinosaur" ? "#f5f5f5" : "#fff"}`}>
                         <img class = "icon" src = "armoured-dinosaur.png"/>
                         <h3>Armoured Dinosaur</h3>
                     </div>
@@ -168,15 +214,15 @@
             <div class = "question-box">
             <h2>Dino Length</h2>
             <div class = "row">
-                <div class = "column" on:click={() => selectLength("short")} style={`border: solid 2px ${length === "short" ? "#D9D9D9" : "#fff"}; background-color: ${length === "short" ? "#f5f5f5" : "#fff"}`}>
+                <div class = "column" on:click={() => selectLength("Short")} style={`border: solid 2px ${length === "Short" ? "#D9D9D9" : "#fff"}; background-color: ${length === "Short" ? "#f5f5f5" : "#fff"}`}>
                     <h3>Short</h3>
                     <img class = "icon" src = "short.png"/>
                 </div>
-                <div class = "column" on:click={() => selectLength("medium")} style={`border: solid 2px ${length === "medium" ? "#D9D9D9" : "#fff"}; background-color: ${length === "medium" ? "#f5f5f5" : "#fff"}`}>
+                <div class = "column" on:click={() => selectLength("Medium")} style={`border: solid 2px ${length === "Medium" ? "#D9D9D9" : "#fff"}; background-color: ${length === "Medium" ? "#f5f5f5" : "#fff"}`}>
                     <h3>Medium</h3>
                     <img class = "icon" src = "medium.png"/>
                 </div>
-                <div class = "column" on:click={() => selectLength("long")} style={`border: solid 2px ${length === "long" ? "#D9D9D9" : "#fff"}; background-color: ${length === "long" ? "#f5f5f5" : "#fff"}`}>
+                <div class = "column" on:click={() => selectLength("Long")} style={`border: solid 2px ${length === "Long" ? "#D9D9D9" : "#fff"}; background-color: ${length === "Long" ? "#f5f5f5" : "#fff"}`}>
                     <h3>Long</h3>
                     <img class = "icon" src = "long.png"/>
                 </div>
