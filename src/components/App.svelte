@@ -20,7 +20,7 @@
       <div class="pages">
         <button class="pageButton" on:click={() => change_page("design-a-dino")}> Design-A-Dino </button>
         <button class="pageButton" on:click={() => change_page("dinodex")}> Dinodex </button>
-        <button class="pageButton" on:click={() => change_page("dinoTrends")}> DinoTrends </button>
+        <button class="pageButton" on:click={() => change_page("dinoTrends")}> Dino Trends </button>
 
       </div>
     </div>
