@@ -1,107 +1,21 @@
-# svelte-template
+## Motivation & Objectives 
+The motivation behind Design-A-Dino derives from how extensive and overwhelming information on the Mesozoic Era can be, especially to younger audiences. The appeal of dinosaurs to children is undeniable, inspiring us to create robust learning experiences. 
 
-This repo contains a template for a Svelte project that uses D3. It has extra
-configuration to make it easy to deploy to GitHub pages.
+## Scope & Deliverables 
+Taking an educational approach, we cater our website to younger audiences. In doing so, we focus on providing simplified explanations of complex geologic patterns. This is more concretely explored through investigation of dinosaur trends across locations and Mesozoic periods. 
 
-## Getting started
+The outlined objectives of the website are addressed through activity based learning. We use the concept of designing a dinosaur in order to familiarize children with aspects of the creatures and their habitats. This includes developing comprehension of classes, diets, location, and more. 
 
-Click the green "Use this template" button, then "Create a new repository" in
-the top right portion of the webpage.
+Through an engaging introduction we are able to expose our audience to much more material, encouraging self exploration. This allows kids to explore analytics, developing critical thinking skills. 
 
-![template](assets/template.png)
+## How we built it
+Our website is built using Svelte, JavaScript, CSS, and HTML. The data behind the website comes from a Kaggle dataset of 307 rows found [here](https://www.kaggle.com/datasets/kjanjua/jurassic-park-the-exhaustive-dinosaur-dataset) . After choosing our dataset we then proceeded to clean the data. This included replacing missing values of lengths of 17 dinosaurs by using the length of other rows of the same respective species. The lengths of dinosaurs were then use to create size categories of small, medium, and long. In addition to this, datatypes were corrected along with any other formatting errors. Other column transformations included categorizing countries into continents. To create the data visualizations included in the "Dino Trends" tab, we used Altair to create an interactive map that implements a tooltip. 
 
-After GitHub completes the cloning process, navigate to the Settings page. On
-the left panel, under the "Pages" tab, locate the "Source" section and select
-"GitHub Actions" as the source.
+## Challenges we ran into
+Challenges to the design and implementation process included formatting margins, padding, and embedding visualizations. Implementing the "Dinodex" tab also posed a challenge due to fetching the data from the dataset and formatting the images of the dinosaurs. 
 
-Then, clone this repository to your local computer. After cloning the
-repository, navigate to the repository in your terminal and run:
+## What we learned
+Through this project we learned how to incorporate different languages, frameworks, platforms, and technologies together to form a cohesive website that works as an educative tool for young audiences. Using Figma, we also learned how to plan out designs as a team including cooperating and building upon constructive criticism.  
 
-```
-npm install
-```
-
-To start your local dev server, run
-
-```
-npm run dev
-```
-
-You can now edit your files in VSCode to see changes update in your browser.
-Start by making a small edit to `src/components/App.svelte` and make sure that
-the changes are reflected in your browser window.
-
-### Including static files (e.g. datasets)
-
-To include files like datasets and images in your project, place your files in
-the `static/` folder (NOT the `src/` folder).
-
-For example, if you have a file `static/temp.csv`, your code can load that
-file by using a relative path:
-
-```js
-const res = await fetch('temp.csv');
-```
-
-Note that with our default configuration, all of these snippets **might work
-locally but not on GitHub pages**:
-
-```js
-// None of these work properly
-// const res = await fetch('/temp.csv');
-// const res = await fetch('static/temp.csv');
-```
-
-### Using other packages (e.g. Mapbox)
-
-To include other packages in your project, install them first by running:
-
-```js
-npm install --save moment
-```
-
-Then, you can import the packages in your Svelte JS like so:
-
-```js
-import moment from 'moment';
-```
-
-You should double check the package page to make sure you didn't miss anything
-during import. For example, the web page for setting up mapbox-gl with Svelte
-(https://docs.mapbox.com/help/tutorials/use-mapbox-gl-js-with-svelte/) says
-that you should actually write two `import` statements:
-
-```js
-// This imports the package itself
-import mapbox from 'mapbox-gl';
-// This import the mapbox CSS styles
-import 'mapbox-gl/dist/mapbox-gl.css';
-```
-
-## Deploying your webpage
-
-To update your GitHub page, make a commit locally and push your changes to
-GitHub. When you do so, the corresponding GitHub Actions will execute and
-automatically update your static website hosted at
-`https://your-username.github.io/your-repo-name` for you.
-
-![github-pages](assets/github-pages.png)
-
-## Debugging
-
-**My code works locally but when I push to GitHub the deployment fails.**
-
-Run `npm run build`, which tries to replicate GitHub's build process. Ideally,
-that command will give the same error message as the GitHub workflow. If so,
-you can tinker with your code locally until `npm run build` works, which will
-have a very high chance of fixing your build. If the command doesn't give the
-same result as the GitHub workflow, make an Ed post.
-
-**My code works locally and deploys, but nothing renders on the screen.**
-
-Check to make sure that your static files (e.g. datasets) are loaded properly.
-For example, if you have a file `static/temp.csv`, your code should load that
-file by using a relative path.
-
-If that doesn't fix your bug, open your browser's console window and see if an
-error appears.
+## What's next for Design-A-Dino
+In the future, we would like to expand our website to include more analytics and features that can further develop it into an effective educational tool.
