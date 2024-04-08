@@ -341,6 +341,9 @@
         height: 300px;
         margin-top: 230px;
     }
+    .dino-fact p {
+        font-size: 20px;
+    }
     .dino-fact .row {
         height: 150px;
         margin-top: 150px;
@@ -376,7 +379,7 @@
     .question-box {
         margin: auto;
         background-color: white;
-        width: 80%;
+        width: 70%;
         height: 50%;
         border-radius: 50px;
         text-align: center;
